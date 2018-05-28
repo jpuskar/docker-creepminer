@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 MAINTAINER Wayne Humphrey <wayne@humphrey.za.net>
 LABEL version="1.4"
 
-WORKDIR /opt
+WORKDIR /tmp
 
 
 # Set some env variables as we mostly work in non interactive mode
@@ -22,7 +22,7 @@ RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold" # 
 RUN wget https://github.com/Creepsky/creepMiner/releases/download/2.7.16/creepMiner-1.7.16-Linux.deb \
   && tar -zxvf creepMiner-1.7.16-Linux.deb
 
-RUN apt install ./creepMiner-1.7.16-Linux.deb
+RUN apt install /tmp/creepMiner-1.7.16-Linux.deb
 
 # build and install creepMiner
 #RUN cd /tmp/ \
