@@ -24,7 +24,7 @@ RUN apt-get update \
 RUN wget https://github.com/Creepsky/creepMiner/releases/download/2.7.16/creepMiner-1.7.16-Linux.deb
 #  && tar -zxvf creepMiner-1.7.16-Linux.deb/
 
-RUN apt install /tmp/creepMiner-1.7.16-Linux.deb
+RUN DEBIAN_FRONTEND=noninteractive apt install /tmp/creepMiner-1.7.16-Linux.deb
 
 # build and install creepMiner
 #RUN cd /tmp/ \
