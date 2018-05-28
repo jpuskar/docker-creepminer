@@ -12,7 +12,9 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 RUN apt-get update \
   && apt-get upgrade -y
 
-RUN apt-get install -y apt-utils wget supervisor curl screen
+RUN apt-get install -y apt-utils
+
+RUN apt-get install -y wget supervisor curl screen
 #  && apt-get install -y --no-install-recommends -o Dpkg::Options::="--force-confold" \
 #  apt-utils supervisor sudo \
 #  net-tools openssh-server \
