@@ -11,7 +11,7 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 # Update system and install Supervisord, OpenSSH server, and tools needed for creepMiner
 RUN apt-get update \
   && apt-get upgrade -y \
-  && apt-get install -y apt-utils wget supervisor
+  && apt-get install -y apt-utils wget supervisor curl screen
 #  && apt-get install -y --no-install-recommends -o Dpkg::Options::="--force-confold" \
 #  apt-utils supervisor sudo \
 #  net-tools openssh-server \
@@ -21,10 +21,10 @@ RUN apt-get update \
 #  xz-utils curl ca-certificates gnupg2 dirmngr \
 #  ocl-icd-opencl-dev
 
-RUN wget --no-verbose https://github.com/Creepsky/creepMiner/releases/download/2.7.16/creepMiner-1.7.16-Linux.deb
+RUN wget --no-verbose https://github.com/Creepsky/creepMiner/releases/download/2.8.0/creepMiner-1.8.0-Linux.deb
 #  && tar -zxvf creepMiner-1.7.16-Linux.deb/
 
-RUN DEBIAN_FRONTEND=noninteractive apt install /tmp/creepMiner-1.7.16-Linux.deb
+RUN DEBIAN_FRONTEND=noninteractive apt install /tmp/creepMiner-1.8.0-Linux.deb
 
 # build and install creepMiner
 #RUN cd /tmp/ \

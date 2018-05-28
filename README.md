@@ -26,7 +26,7 @@ whumphrey/creepminer
 ```
 
 ```bash
-docker run --name creepMiner -e AUTO_START=TRUE -e TZ=US -p 8124:8124 -v /etc/creeepMiner:/config:Z -v /media/plot/plots:/plot/01:Z 27aac384d7e0
+docker run -it --name creepMiner -e AUTO_START=TRUE -e TZ=US -p 8124:8124 -v /etc/creeepMiner:/config:Z -v /media/plot/plots:/plot/01:Z 27aac384d7e0
 ```
 
 Timezones:
