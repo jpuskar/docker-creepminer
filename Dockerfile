@@ -27,7 +27,7 @@ RUN cd /tmp/ \
   && git clone -b development https://github.com/Creepsky/creepMiner \
   && cd creepMiner
 
-RUN cd /tmp/ \
+RUN cd /tmp/creepMiner \
   && set +x \
   && conan install . -s compiler.libcxx=libstdc++11 --build=missing \
   && cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=RELEASE -DUSE_CUDA=OFF \
