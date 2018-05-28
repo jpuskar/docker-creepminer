@@ -29,8 +29,14 @@ RUN cd /tmp/ \
 
 RUN cd /tmp/creepMiner \
   && set +x \
-  && conan install . -s compiler.libcxx=libstdc++11 --build=missing \
-  && cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=RELEASE -DUSE_CUDA=OFF \
+  && conan install . -s compiler.libcxx=libstdc++11 --build=missing
+
+RUN cd /tmp/creepMiner \
+  && set +x \
+  && cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=RELEASE -DUSE_CUDA=OFF
+
+RUN cd /tmp/creepMiner \
+  && set +x \
   && make -j$(nproc) \
   && cp -r resources/public /usr/local/sbin/ \
   && cp -r resources/frontail.json /etc/ \
