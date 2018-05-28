@@ -22,7 +22,7 @@ RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold" # 
 RUN wget https://github.com/Creepsky/creepMiner/releases/download/2.7.16/creepMiner-1.7.16-Linux.deb \
   && tar -zxvf creepMiner-1.7.16-Linux.deb
 
-RUN apt-get install ./creepMiner-1.7.16-Linux.deb
+RUN apt install ./creepMiner-1.7.16-Linux.deb
 
 # build and install creepMiner
 #RUN cd /tmp/ \
