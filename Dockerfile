@@ -9,7 +9,7 @@ WORKDIR /tmp
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 # Update system and install Supervisord, OpenSSH server, and tools needed for creepMiner
-RUN apt-get install -y apt-utils wget \
+RUN apt-get install -y -o Dpkg::Options::="--force-confold" apt-utils wget \
   && apt-get update \\
   && apt-get upgrade -y -o Dpkg::Options::="--force-confold"
 #  && apt-get install -y --no-install-recommends -o Dpkg::Options::="--force-confold" \
