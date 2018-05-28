@@ -25,6 +25,14 @@ docker create \
 whumphrey/creepminer
 ```
 
+```bash
+docker run --name creepMiner -e AUTO_START=TRUE -e TZ=US -p 8124:8124 -v /etc/creeepMiner:/config:Z -v /media/plot/plots:/plot/01:Z 27aac384d7e0
+```
+
+Timezones:
+https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+
 By default the miner uses a default config `/usr/local/sbin/mining.conf`. 
 
 Please use your own [`mining.conf`](https://github.com/Creepsky/creepMiner/wiki/Sample-mining.conf).
