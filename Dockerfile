@@ -35,13 +35,13 @@ RUN cd /tmp/ \
 
 
 # webproc release settings
-RUN curl -sL https://github.com/jpillora/webproc/releases/download/0.1.9/webproc_linux_amd64.gz | gzip -d - > /usr/bin/webproc \
-    && chmod +x /usr/bin/webproc
+# RUN curl -sL https://github.com/jpillora/webproc/releases/download/0.1.9/webproc_linux_amd64.gz | gzip -d - > /usr/bin/webproc \
+#     && chmod +x /usr/bin/webproc
 
 # install frontail
-RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - \
-  && apt-get install nodejs \
-  && npm i frontail -g
+#RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - \
+#  && apt-get install nodejs \
+#  && npm i frontail -g
 
 # Add init and supervisord config
 ADD helper/init /sbin/init
@@ -50,8 +50,8 @@ ADD helper/mining.conf /usr/local/sbin/mining.conf
 RUN chmod 755 /sbin/init
 
 # Add creepUser | creep / M1n3r and set root password
-RUN useradd -m -p FIEyX7IsHWazs -s /bin/bash creep \
-  && echo 'root:toor' | chpasswd
+#RUN useradd -m -p FIEyX7IsHWazs -s /bin/bash creep \
+#  && echo 'root:toor' | chpasswd
 
 # Expose port 8124 for creepMiner UI, 9001 for supervisord or webproc and 9002 for frontail
 EXPOSE 8124 9001 9002
