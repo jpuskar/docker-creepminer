@@ -2,49 +2,57 @@ FROM ubuntu:16.04
 MAINTAINER Wayne Humphrey <wayne@humphrey.za.net>
 LABEL version="1.4"
 
+WORKDIR /opt
+
+
 # Set some env variables as we mostly work in non interactive mode
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 # Update system and install Supervisord, OpenSSH server, and tools needed for creepMiner
-RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold" \
-  && apt-get install -y --no-install-recommends -o Dpkg::Options::="--force-confold" \
-  apt-utils supervisor sudo \
-  net-tools openssh-server \
-  build-essential cmake git \
-  python-pip python-setuptools python-dev \
-  openssl libssl-dev \
-  xz-utils curl ca-certificates gnupg2 dirmngr \
-  ocl-icd-opencl-dev
+RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold" # \
+#  && apt-get install -y --no-install-recommends -o Dpkg::Options::="--force-confold" \
+#  apt-utils supervisor sudo \
+#  net-tools openssh-server \
+#  build-essential cmake git \
+#  python-pip python-setuptools python-dev \
+#  openssl libssl-dev \
+#  xz-utils curl ca-certificates gnupg2 dirmngr \
+#  ocl-icd-opencl-dev
+
+RUN wget https://github.com/Creepsky/creepMiner/releases/download/2.7.16/creepMiner-1.7.16-Linux.deb \
+  && tar -zxvf creepMiner-1.7.16-Linux.deb
+
+RUN apt-get install ./creepMiner-1.7.16-Linux.deb
 
 # build and install creepMiner
-RUN cd /tmp/ \
-  && set +x \
-  && pip install --upgrade pip \
-  && pip2.7 install conan
+#RUN cd /tmp/ \
+#  && set +x \
+#  && pip install --upgrade pip \
+#  && pip2.7 install conan
 
-RUN cd /tmp/ \
-  && set +x \
-  && git clone -b development https://github.com/Creepsky/creepMiner \
-  && cd creepMiner
-
-RUN cd /tmp/creepMiner \
-  && set +x \
-  && conan install . -s compiler.libcxx=libstdc++11 --build=missing
-
-RUN cd /tmp/creepMiner \
-  && set +x \
-  && cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=RELEASE -DUSE_CUDA=OFF
-
-RUN cd /tmp/creepMiner \
-  && set +x \
-  && make -j$(nproc) \
-  && cp -r resources/public /usr/local/sbin/ \
-  && cp -r resources/frontail.json /etc/ \
-  && cp -r src/shabal/opencl/mining.cl /usr/local/sbin/ \
-  && cp -r bin/creepMiner /usr/local/sbin/ \
-  && sed -i '2s/creepMiner/creepContainer/' /usr/local/sbin/public/js/general.js \
-  && sed -i '4s/false/true/' /usr/local/sbin/public/js/general.js \
-  && mkdir /config && mkdir /logs
+#RUN cd /tmp/ \
+#  && set +x \
+#  && git clone -b development https://github.com/Creepsky/creepMiner \
+#  && cd creepMiner
+#
+#RUN cd /tmp/creepMiner \
+#  && set +x \
+#  && conan install . -s compiler.libcxx=libstdc++11 --build=missing
+#
+#RUN cd /tmp/creepMiner \
+#  && set +x \
+#  && cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=RELEASE -DUSE_CUDA=OFF
+#
+#RUN cd /tmp/creepMiner \
+#  && set +x \
+#  && make -j$(nproc) \
+#  && cp -r resources/public /usr/local/sbin/ \
+#  && cp -r resources/frontail.json /etc/ \
+#  && cp -r src/shabal/opencl/mining.cl /usr/local/sbin/ \
+#  && cp -r bin/creepMiner /usr/local/sbin/ \
+#  && sed -i '2s/creepMiner/creepContainer/' /usr/local/sbin/public/js/general.js \
+#  && sed -i '4s/false/true/' /usr/local/sbin/public/js/general.js \
+#  && mkdir /config && mkdir /logs
 
 
 # webproc release settings
