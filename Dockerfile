@@ -10,8 +10,9 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 
 # Update system and install Supervisord, OpenSSH server, and tools needed for creepMiner
 RUN apt-get update \
-  && apt-get upgrade -y \
-  && apt-get install -y apt-utils wget supervisor curl screen
+  && apt-get upgrade -y
+
+RUN apt-get install -y apt-utils wget supervisor curl screen
 #  && apt-get install -y --no-install-recommends -o Dpkg::Options::="--force-confold" \
 #  apt-utils supervisor sudo \
 #  net-tools openssh-server \
