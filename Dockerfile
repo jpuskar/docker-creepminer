@@ -18,14 +18,17 @@ RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold" \
 
 # build and install creepMiner
 RUN cd /tmp/ \
+  && set +x \
   && pip install --upgrade pip \
   && pip2.7 install conan
 
 RUN cd /tmp/ \
+  && set +x \
   && git clone -b development https://github.com/Creepsky/creepMiner \
-  && cd creepMiner \
+  && cd creepMiner
 
 RUN cd /tmp/ \
+  && set +x \
   && conan install . -s compiler.libcxx=libstdc++11 --build=missing \
   && cmake CMakeLists.txt -DCMAKE_BUILD_TYPE=RELEASE -DUSE_CUDA=OFF \
   && make -j$(nproc) \
